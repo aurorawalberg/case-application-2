@@ -1,0 +1,70 @@
+<div class="page">
+  <mat-card class="top-bar">
+    <div>
+      <mat-card-title
+        >The moving company<mat-icon class="top-bar-icon"
+          >local_shipping</mat-icon
+        ></mat-card-title
+      >
+      <div class="top-bar-info">Logged in as sales</div>
+    </div>
+  </mat-card>
+  <div class="page-content">
+    <mat-card>
+      <mat-card-title>Orders </mat-card-title>
+      <mat-list class="order-list" *ngIf="orders$ | async as orders">
+        <mat-list-item *ngFor="let order of orders">
+          <div class="list-item">
+            <span>
+              {{ order.orderId }}
+            </span>
+            <span>
+              {{ order.customer.name }}
+            </span>
+            <span>
+              {{ order.customer.customerId }}
+            </span>
+            <span>
+              {{ order.customer.email }}
+            </span>
+            <span>
+              {{ order.customer.phoneNumber }}
+            </span>
+            <div>
+              {{ order.toAdress }}
+            </div>
+            <div>
+              {{ order.fromAdress }}
+            </div>
+
+            <mat-chip-list>
+              <mat-chip
+                color="primary"
+                *ngFor="let service of order.services"
+                >{{ service.service }}</mat-chip
+              >
+            </mat-chip-list>
+            <button mat-icon-button><mat-icon>note</mat-icon></button>
+            <button mat-icon-button (click)="updateOrder(order)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteOrder(order.orderId)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>New order</mat-card-title>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>Moving</mat-list-item>
+          <mat-list-item>Cleaning</mat-list-item>
+          <mat-list-item>Packing</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
