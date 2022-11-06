@@ -1,14 +1,14 @@
-import { createSelector } from '@ngrx/store';
-import { AppState, DataState } from '../data.store.model';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { DataFeatureKey, DataState } from '../data.store.model';
 import { OrderModel } from '../../models/order.model';
 import { OrderEntityModel } from 'src/app/models/order-entity.model';
 import { ServiceEntityModel } from 'src/app/models/service-entity.model';
 import { CustomerEntityModel } from 'src/app/models/customer-entity.model';
 
-export const selectFeature = (state: AppState) => state.data;
+export const getDataState = createFeatureSelector<DataState>(DataFeatureKey);
 
 export const selectOrdersEntities = createSelector(
-  selectFeature,
+  getDataState,
   (state: DataState) => state.orders
 );
 
@@ -19,13 +19,25 @@ export const selectOrders = createSelector(
 );
 
 export const selectServiceEntities = createSelector(
-  selectFeature,
+  getDataState,
   (state: DataState) => state.services
 );
 
+export const selectServices = createSelector(
+  selectServiceEntities,
+  (serviceEntities: { [key: string]: ServiceEntityModel[] }) =>
+    Object.values(serviceEntities)
+);
+
 export const selectCustomerEntities = createSelector(
-  selectFeature,
+  getDataState,
   (state: DataState) => state.customers
+);
+
+export const selectCustomers = createSelector(
+  selectCustomerEntities,
+  (customerEntities: { [key: string]: CustomerEntityModel }) =>
+    Object.values(customerEntities)
 );
 
 export const selectOrderData = createSelector(
@@ -39,7 +51,7 @@ export const selectOrderData = createSelector(
   ): OrderModel[] => {
     return Object.values(orders).map((order) => {
       return {
-        ...order,
+        order,
         services: serviceEntities[order.orderId],
         customer: customerEntities[order.customerId],
       };

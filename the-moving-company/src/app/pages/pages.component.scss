@@ -1,13 +1,14 @@
+@use "@angular/material" as mat;
+
 .list-item {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr 3fr 3fr 3fr 3fr 2fr 1fr 1fr 1fr;
-  // he
+  grid-template-columns: 0.5fr 3fr 0.5fr 5fr 3fr 3fr 6fr 3fr 1fr 1fr;
 }
 
 .top-bar {
   height: 20%;
   color: white;
-  background-color: red;
+  background-color: rgb(215, 5, 5);
   margin-bottom: 1rem;
 }
 
@@ -33,5 +34,13 @@
 
 .page-content {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 4fr 1fr;
+}
+
+.service-item {
+  font-size: small;
+}
+
+.customer-phone {
+  font-size: small;
 }

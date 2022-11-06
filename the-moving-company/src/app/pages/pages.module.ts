@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { PagesComponent } from './pages.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditOrderComponent } from './edit-order/edit-order.component';
+import { MaterialModule } from '../material.module';
+import { StoreModule } from '@ngrx/store';
+import { DataFeatureKey } from '../store/data.store.model';
+import { dataReducer } from '../store/reducers/data.reducer';
 
 @NgModule({
-  declarations: [PagesComponent],
+  declarations: [PagesComponent, EditOrderComponent],
   imports: [
     CommonModule,
     FormsModule,
-    MatButtonModule,
-    MatListModule,
-    MatIconModule,
-    MatChipsModule,
-    MatCardModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    StoreModule.forFeature(DataFeatureKey, dataReducer),
+    StoreModule.forRoot({}),
   ],
   exports: [PagesComponent],
 })

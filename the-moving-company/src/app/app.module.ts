@@ -4,9 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from './pages/pages.module';
-import { StoreModule } from '@ngrx/store';
-import { dataReducer } from './store/reducers/data.reducer';
-import { DataFeatureKey } from './store/data.store.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,8 +13,7 @@ import { DataFeatureKey } from './store/data.store.model';
     AppRoutingModule,
     BrowserAnimationsModule,
     PagesModule,
-    // StoreModule.forFeature(DataFeatureKey, dataReducer),
-    // StoreModule.forRoot({}),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

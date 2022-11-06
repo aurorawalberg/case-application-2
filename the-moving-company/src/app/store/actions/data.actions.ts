@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { CustomerEntityModel } from 'src/app/models/customer-entity.model';
 import { OrderEntityModel } from 'src/app/models/order-entity.model';
+import { OrderModel } from 'src/app/models/order.model';
 import { ServiceEntityModel } from 'src/app/models/service-entity.model';
 
 enum ActionType {
@@ -34,11 +35,11 @@ export const PageActions = {
   ),
   updateOrder: createAction(
     ActionType.UpdateOrder,
-    props<{ order: OrderEntityModel }>()
+    props<{ order: OrderModel }>()
   ),
-  addOrder: createAction(
+  createOrder: createAction(
     ActionType.UpdateOrder,
-    props<{ order: OrderEntityModel }>()
+    props<{ order: OrderModel }>()
   ),
   deleteOrder: createAction(
     ActionType.DeleteOrder,

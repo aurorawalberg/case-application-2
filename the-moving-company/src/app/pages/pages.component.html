@@ -1,5 +1,5 @@
 <div class="page">
-  <mat-card class="top-bar">
+  <mat-card color="primary" class="top-bar">
     <div>
       <mat-card-title
         >The moving company<mat-icon class="top-bar-icon"
@@ -16,7 +16,7 @@
         <mat-list-item *ngFor="let order of orders">
           <div class="list-item">
             <span>
-              {{ order.orderId }}
+              {{ order.order.orderId }}
             </span>
             <span>
               {{ order.customer.name }}
@@ -24,46 +24,45 @@
             <span>
               {{ order.customer.customerId }}
             </span>
-            <span>
-              {{ order.customer.email }}
-            </span>
-            <span>
-              {{ order.customer.phoneNumber }}
-            </span>
             <div>
-              {{ order.toAdress }}
+              <span>
+                {{ order.customer.email }}
+              </span>
+              <br />
+              <span class="customer-phone">
+                {{ order.customer.phoneNumber }}
+              </span>
             </div>
             <div>
-              {{ order.fromAdress }}
+              {{ order.order.toAdress }}
+            </div>
+            <div>
+              {{ order.order.fromAdress }}
             </div>
 
-            <mat-chip-list>
-              <mat-chip
-                color="primary"
-                *ngFor="let service of order.services"
-                >{{ service.service }}</mat-chip
-              >
-            </mat-chip-list>
-            <button mat-icon-button><mat-icon>note</mat-icon></button>
+            <div>
+              <div class="service-item" *ngFor="let service of order.services">
+                {{ service.serviceType + ": " + (service.date | date) }}
+              </div>
+            </div>
+            <div>
+              {{ order.order.note }}
+            </div>
             <button mat-icon-button (click)="updateOrder(order)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="deleteOrder(order.orderId)">
+            <button mat-icon-button (click)="deleteOrder(order.order.orderId)">
               <mat-icon>delete</mat-icon>
             </button>
+            <mat-divider></mat-divider>
           </div>
-          <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
     </mat-card>
     <mat-card>
       <mat-card-title>New order</mat-card-title>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>Moving</mat-list-item>
-          <mat-list-item>Cleaning</mat-list-item>
-          <mat-list-item>Packing</mat-list-item>
-        </mat-list>
+      <mat-card-content *ngIf="customers$ | async as customers">
+        <app-edit-order [customers]="customers"></app-edit-order>
       </mat-card-content>
     </mat-card>
   </div>

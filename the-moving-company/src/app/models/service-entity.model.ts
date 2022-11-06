@@ -1,5 +1,5 @@
 export interface ServiceEntityModel {
   orderId: number;
-  service: 'Packing' | 'Moving' | 'Cleaning';
+  serviceType: number;
   date: Date;
 }

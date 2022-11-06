@@ -1,11 +1,9 @@
 import { CustomerEntityModel } from './customer-entity.model';
+import { OrderEntityModel } from './order-entity.model';
 import { ServiceEntityModel } from './service-entity.model';
 
 export interface OrderModel {
-  orderId: number;
-  fromAdress: string;
-  toAdress: string;
-  note: string;
+  order: OrderEntityModel;
   customer: CustomerEntityModel;
   services: ServiceEntityModel[];
 }
