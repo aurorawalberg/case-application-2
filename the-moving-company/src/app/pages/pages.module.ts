@@ -12,6 +12,7 @@ import { DataFeatureKey } from '../store/data.store.model';
 import { dataReducer } from '../store/reducers/data.reducer';
 import { DataEffects } from '../store/effects/data.effects';
 import { OrderTableComponent } from './order-table/order-table.component';
+// import { NgLetModule } from 'ng-let';
 
 @NgModule({
   declarations: [PagesComponent, EditOrderComponent, OrderTableComponent],
@@ -20,6 +21,7 @@ import { OrderTableComponent } from './order-table/order-table.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    // NgLetModule,
     StoreModule.forFeature(DataFeatureKey, dataReducer),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
