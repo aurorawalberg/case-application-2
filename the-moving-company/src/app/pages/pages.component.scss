@@ -1,22 +1,10 @@
 .page-content {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 5fr 1fr;
   gap: 1rem;
   margin: 1rem;
 }
 
-.service-item {
-  font-size: small;
-}
-
-.customer-phone {
-  font-size: small;
-}
-
 .toolbar-spacer {
   flex: 1 1 auto;
-}
-
-table {
-  width: 100%;
 }

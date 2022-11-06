@@ -58,3 +58,8 @@ export const selectOrderData = createSelector(
     });
   }
 );
+
+export const selectOrderInEdit = createSelector(
+  getDataState,
+  (state: DataState) => state.orderInEdit
+);

@@ -1,5 +1,5 @@
 export interface ServiceEntityModel {
   orderId: number;
-  serviceType: number;
+  serviceType: string;
   date: Date;
 }

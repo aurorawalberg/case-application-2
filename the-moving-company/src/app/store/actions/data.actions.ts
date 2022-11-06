@@ -15,9 +15,14 @@ enum ActionType {
   UpdateOrder = '[Order page] Update Order',
   DeleteOrder = '[Order page] Delete Order',
   AddOrder = '[Order page] Add Order',
+  SetOrderInEdit = '[Order page] Set Order In Edit',
 }
 
-export const PageActions = {
+export const DataActions = {
+  loadDataError: createAction(
+    ActionType.LoadDataError,
+    props<{ message: string; error?: string }>()
+  ),
   loadCustomerData: createAction(ActionType.LoadCustomerData),
   customerDataUpdated: createAction(
     ActionType.CustomerDataUpdated,
@@ -45,11 +50,8 @@ export const PageActions = {
     ActionType.DeleteOrder,
     props<{ orderId: number }>()
   ),
-};
-
-export const ApiActions = {
-  loadDataError: createAction(
-    ActionType.LoadDataError,
-    props<{ message: string; error?: string }>()
+  setOrderInEdit: createAction(
+    ActionType.SetOrderInEdit,
+    props<{ order: OrderModel }>()
   ),
 };

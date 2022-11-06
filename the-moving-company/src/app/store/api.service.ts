@@ -33,14 +33,17 @@ export class ApiService {
   }
 
   deleteOrder(orderId: number) {
-    console.log('Order deleted: ' + orderId);
+    return this.httpClient.delete(`${baseAPIUrl}/orders/${orderId}`);
   }
 
   updateOrder(order: OrderModel) {
-    console.log('Order edited: ' + order.order.orderId);
+    return this.httpClient.post(
+      `${baseAPIUrl}/orders/${order.order.orderId}`,
+      order
+    );
   }
 
   createOrder(order: OrderModel) {
-    console.log('Order created: ' + order.order.orderId);
+    return this.httpClient.post(`${baseAPIUrl}/orders`, order);
   }
 }

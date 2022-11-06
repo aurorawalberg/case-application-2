@@ -11,9 +11,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { DataFeatureKey } from '../store/data.store.model';
 import { dataReducer } from '../store/reducers/data.reducer';
 import { DataEffects } from '../store/effects/data.effects';
+import { OrderTableComponent } from './order-table/order-table.component';
 
 @NgModule({
-  declarations: [PagesComponent, EditOrderComponent],
+  declarations: [PagesComponent, EditOrderComponent, OrderTableComponent],
   imports: [
     CommonModule,
     FormsModule,

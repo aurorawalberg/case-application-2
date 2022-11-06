@@ -2,34 +2,47 @@ import { createReducer, on } from '@ngrx/store';
 import { CustomerEntityModel } from 'src/app/models/customer-entity.model';
 import { OrderEntityModel } from 'src/app/models/order-entity.model';
 import { ServiceEntityModel } from 'src/app/models/service-entity.model';
-import { PageActions } from '../actions/data.actions';
+import { DataActions } from '../actions/data.actions';
 import { DataState } from '../data.store.model';
 
 export const initialState: DataState = {
   orders: {},
   customers: {},
   services: {},
+  orderInEdit: undefined,
   error: [],
 };
 
 const _dataReducer = createReducer(
   initialState,
-  on(PageActions.orderDataUpdated, (state, { data }) => {
+  on(DataActions.orderDataUpdated, (state, { data }) => {
     return {
       ...state,
       orders: formatOrderDataToEntity(data),
     };
   }),
-  on(PageActions.serviceDataUpdated, (state, { data }) => {
+  on(DataActions.serviceDataUpdated, (state, { data }) => {
     return {
       ...state,
       services: formatServiceDataToEntity(data),
     };
   }),
-  on(PageActions.customerDataUpdated, (state, { data }) => {
+  on(DataActions.customerDataUpdated, (state, { data }) => {
     return {
       ...state,
       customers: formatCustomerDataToEntity(data),
+    };
+  }),
+  on(DataActions.setOrderInEdit, (state, { order }) => {
+    return {
+      ...state,
+      orderInEdit: order,
+    };
+  }),
+  on(DataActions.updateOrder, (state) => {
+    return {
+      ...state,
+      orderInEdit: undefined,
     };
   })
 );

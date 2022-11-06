@@ -1,65 +1,76 @@
-<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>Customer</mat-label>
-    <mat-select formControlName="customer">
-      <mat-option
-        *ngFor="let customer of customers"
-        [value]="customer.customerId"
-      >
-        {{ customer.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>From adress </mat-label>
-    <textarea matInput formControlName="fromAdress"></textarea>
-  </mat-form-field>
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>To adress </mat-label>
-    <textarea matInput formControlName="toAdress"></textarea>
-  </mat-form-field>
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>Note</mat-label>
-    <textarea matInput formControlName="note"></textarea>
-  </mat-form-field>
+<div *ngIf="orderInEdit$ | async as orderInEdit">
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit(!!orderInEdit)">
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Customer</mat-label>
+      <mat-select formControlName="customer">
+        <mat-option
+          *ngFor="let customer of customers"
+          [value]="customer.customerId"
+        >
+          {{ customer.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>From adress </mat-label>
+      <textarea matInput formControlName="fromAdress"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>To adress </mat-label>
+      <textarea matInput formControlName="toAdress"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Note</mat-label>
+      <textarea matInput formControlName="note"></textarea>
+    </mat-form-field>
 
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>Moving</mat-label>
-    <input matInput formControlName="moveDate" [matDatepicker]="movingPicker" />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="movingPicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #movingPicker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>Packing</mat-label>
-    <input
-      matInput
-      formControlName="packDate"
-      [matDatepicker]="packingPicker"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="packingPicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #packingPicker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="legacy" color="warn">
-    <mat-label>Cleaning</mat-label>
-    <input
-      matInput
-      formControlName="cleanDate"
-      [matDatepicker]="cleaningPicker"
-    />
-    <div></div>
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="cleaningPicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #cleaningPicker></mat-datepicker>
-  </mat-form-field>
-  <br />
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Moving</mat-label>
+      <input
+        matInput
+        formControlName="moveDate"
+        [matDatepicker]="movingPicker"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="movingPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #movingPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Packing</mat-label>
+      <input
+        matInput
+        formControlName="packDate"
+        [matDatepicker]="packingPicker"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="packingPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #packingPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Cleaning</mat-label>
+      <input
+        matInput
+        formControlName="cleanDate"
+        [matDatepicker]="cleaningPicker"
+      />
+      <div></div>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="cleaningPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #cleaningPicker></mat-datepicker>
+    </mat-form-field>
+    <br />
 
-  <button mat-raised-button color="warn" type="submit">Create</button>
-</form>
+    <div class="form-buttons">
+      <button mat-raised-button type="reset">Clear</button>
+      <button mat-raised-button color="warn" type="submit">
+        {{ !orderInEdit ? "Create" : "Update" }}
+      </button>
+    </div>
+  </form>
+</div>
