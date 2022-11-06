@@ -1,64 +1,112 @@
 <div class="page">
-  <mat-card color="primary" class="top-bar">
-    <div>
-      <mat-card-title
-        >The moving company<mat-icon class="top-bar-icon"
-          >local_shipping</mat-icon
-        ></mat-card-title
-      >
+  <p>
+    <mat-toolbar color="warn">
+      <button mat-icon-button aria-label="Example icon-button with menu icon">
+        <mat-icon>local_shipping</mat-icon>
+      </button>
+      <span>The moving company</span>
+      <span class="toolbar-spacer"></span>
       <div class="top-bar-info">Logged in as sales</div>
-    </div>
-  </mat-card>
+    </mat-toolbar>
+  </p>
   <div class="page-content">
-    <mat-card>
-      <mat-card-title>Orders </mat-card-title>
-      <mat-list class="order-list" *ngIf="orders$ | async as orders">
-        <mat-list-item *ngFor="let order of orders">
-          <div class="list-item">
-            <span>
-              {{ order.order.orderId }}
-            </span>
-            <span>
-              {{ order.customer.name }}
-            </span>
-            <span>
-              {{ order.customer.customerId }}
-            </span>
-            <div>
+    <div *ngIf="orders$ | async as orders">
+      <mat-card>
+        <mat-form-field appearance="standard" color="warn">
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="1"
+            #input
+          />
+        </mat-form-field>
+        <table mat-table [dataSource]="orders">
+          <ng-container matColumnDef="orderId">
+            <th mat-header-cell *matHeaderCellDef>Order id</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.order.orderId }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>Customer name</th>
+            <td mat-cell *matCellDef="let element">
               <span>
-                {{ order.customer.email }}
+                {{ element.customer.email }}
               </span>
               <br />
               <span class="customer-phone">
-                {{ order.customer.phoneNumber }}
+                {{ element.customer.phoneNumber }}
               </span>
-            </div>
-            <div>
-              {{ order.order.toAdress }}
-            </div>
-            <div>
-              {{ order.order.fromAdress }}
-            </div>
+            </td>
+          </ng-container>
 
-            <div>
-              <div class="service-item" *ngFor="let service of order.services">
+          <ng-container matColumnDef="customerId">
+            <th mat-header-cell *matHeaderCellDef>Customer id</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.customer.id }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fromAdress">
+            <th mat-header-cell *matHeaderCellDef>From adress</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.order.fromAdress }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="toAdress">
+            <th mat-header-cell *matHeaderCellDef>To adress</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.order.toAdress }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="services">
+            <th mat-header-cell *matHeaderCellDef>Services</th>
+            <td mat-cell *matCellDef="let element">
+              <div
+                class="service-item"
+                *ngFor="let service of element.services"
+              >
                 {{ service.serviceType + ": " + (service.date | date) }}
               </div>
-            </div>
-            <div>
-              {{ order.order.note }}
-            </div>
-            <button mat-icon-button (click)="updateOrder(order)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteOrder(order.order.orderId)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <mat-divider></mat-divider>
-          </div>
-        </mat-list-item>
-      </mat-list>
-    </mat-card>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef>Note</th>
+            <td mat-cell *matCellDef="let element">{{ element.order.note }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="updateOrder(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                (click)="deleteOrder(element.order.orderId)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </mat-card>
+    </div>
+
     <mat-card>
       <mat-card-title>New order</mat-card-title>
       <mat-card-content *ngIf="customers$ | async as customers">

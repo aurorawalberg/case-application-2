@@ -1,5 +1,5 @@
 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>Customer</mat-label>
     <mat-select formControlName="customer">
       <mat-option
@@ -10,20 +10,20 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>From adress </mat-label>
     <textarea matInput formControlName="fromAdress"></textarea>
   </mat-form-field>
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>To adress </mat-label>
     <textarea matInput formControlName="toAdress"></textarea>
   </mat-form-field>
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>Note</mat-label>
     <textarea matInput formControlName="note"></textarea>
   </mat-form-field>
 
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>Moving</mat-label>
     <input matInput formControlName="moveDate" [matDatepicker]="movingPicker" />
     <mat-datepicker-toggle
@@ -32,7 +32,7 @@
     ></mat-datepicker-toggle>
     <mat-datepicker #movingPicker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>Packing</mat-label>
     <input
       matInput
@@ -45,7 +45,7 @@
     ></mat-datepicker-toggle>
     <mat-datepicker #packingPicker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="legacy" color="warn">
     <mat-label>Cleaning</mat-label>
     <input
       matInput

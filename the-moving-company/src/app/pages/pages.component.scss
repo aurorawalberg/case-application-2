@@ -1,40 +1,8 @@
-@use "@angular/material" as mat;
-
-.list-item {
-  display: grid;
-  grid-template-columns: 0.5fr 3fr 0.5fr 5fr 3fr 3fr 6fr 3fr 1fr 1fr;
-}
-
-.top-bar {
-  height: 20%;
-  color: white;
-  background-color: rgb(215, 5, 5);
-  margin-bottom: 1rem;
-}
-
-.top-bar-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.top-bar-icon {
-  color: white;
-  padding-left: 1rem;
-  padding-bottom: 1rem;
-}
-
-.order-list {
-  margin: 1rem;
-  margin-top: 2rem;
-}
-
-.page {
-  width: 100%;
-}
-
 .page-content {
   display: grid;
   grid-template-columns: 4fr 1fr;
+  gap: 1rem;
+  margin: 1rem;
 }
 
 .service-item {
@@ -43,4 +11,12 @@
 
 .customer-phone {
   font-size: small;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+table {
+  width: 100%;
 }

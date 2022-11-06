@@ -13,7 +13,6 @@ export class DataEffects {
       switchMap(() =>
         this.dataService.getCustomers().pipe(
           map((data) => {
-            console.log(data);
             return PageActions.customerDataUpdated({ data });
           }),
           catchError((e) =>
