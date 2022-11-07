@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ServiceTypePipe implements PipeTransform {
   transform(serviceType: number): string {
-    console.log(serviceType);
     if (serviceType === 0) {
       return 'Moving';
     }

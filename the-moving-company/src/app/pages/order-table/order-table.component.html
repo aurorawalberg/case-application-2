@@ -6,12 +6,17 @@
     </mat-form-field>
     <table mat-table [dataSource]="orderData">
       <ng-container matColumnDef="orderId">
-        <th mat-header-cell *matHeaderCellDef>Order ID</th>
+        <th mat-header-cell *matHeaderCellDef>Order Id</th>
         <td mat-cell *matCellDef="let element">
           {{ element.order.orderId }}
         </td>
       </ng-container>
-
+      <ng-container matColumnDef="orderDate">
+        <th mat-header-cell *matHeaderCellDef>Date placed</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.order.date | date }}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="customerName">
         <th mat-header-cell *matHeaderCellDef>Customer name</th>
         <td mat-cell *matCellDef="let element">
@@ -26,7 +31,7 @@
       </ng-container>
 
       <ng-container matColumnDef="customerId">
-        <th mat-header-cell *matHeaderCellDef>Customer ID</th>
+        <th mat-header-cell *matHeaderCellDef>Customer Id</th>
         <td mat-cell *matCellDef="let element">
           {{ element.customer.customerId }}
         </td>
@@ -51,7 +56,10 @@
         <td mat-cell *matCellDef="let element">
           <div class="services">
             <div class="service-item" *ngFor="let service of element.services">
-              {{ service.serviceType + ": " + (service.date | date) }}
+              <mat-icon class="service-icon">
+                {{ service.serviceType | serviceIcon }}
+              </mat-icon>
+              {{ service.date | date }}
             </div>
           </div>
         </td>

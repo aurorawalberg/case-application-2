@@ -4,4 +4,5 @@ export interface OrderEntityModel {
   fromAdress: string;
   toAdress: string;
   note: string;
+  date: Date;
 }

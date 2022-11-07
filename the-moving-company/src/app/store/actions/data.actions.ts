@@ -16,6 +16,7 @@ enum ActionType {
   DeleteOrder = '[Order page] Delete Order',
   AddOrder = '[Order page] Add Order',
   SetOrderInEdit = '[Order page] Set Order In Edit',
+  ClearOrderInEdit = '[Order page] Clear Order In Edit',
 }
 
 export const DataActions = {
@@ -54,4 +55,5 @@ export const DataActions = {
     ActionType.SetOrderInEdit,
     props<{ order: OrderModel }>()
   ),
+  clearOrderInEdit: createAction(ActionType.ClearOrderInEdit),
 };

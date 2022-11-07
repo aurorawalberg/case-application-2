@@ -1,15 +1,16 @@
-<div *ngIf="orderInEdit$ | async as orderInEdit">
+<div *ngLet="orderInEdit$ | async as orderInEdit">
   <form [formGroup]="orderForm" (ngSubmit)="onSubmit(!!orderInEdit)">
     <mat-form-field appearance="legacy" color="warn">
-      <mat-label>Customer</mat-label>
-      <mat-select formControlName="customer">
-        <mat-option
-          *ngFor="let customer of customers"
-          [value]="customer.customerId"
-        >
-          {{ customer.name }}
-        </mat-option>
-      </mat-select>
+      <mat-label>Customer name </mat-label>
+      <input matInput formControlName="customerName" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Customer phone </mat-label>
+      <input matInput formControlName="customerPhone" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="warn">
+      <mat-label>Customer email </mat-label>
+      <input matInput formControlName="customerEmail" />
     </mat-form-field>
     <mat-form-field appearance="legacy" color="warn">
       <mat-label>From adress </mat-label>
@@ -67,7 +68,9 @@
     <br />
 
     <div class="form-buttons">
-      <button mat-raised-button type="reset">Clear</button>
+      <button mat-raised-button type="reset" (click)="clearOrderInEdit()">
+        Clear
+      </button>
       <button mat-raised-button color="warn" type="submit">
         {{ !orderInEdit ? "Create" : "Update" }}
       </button>

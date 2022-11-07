@@ -17,6 +17,7 @@ export class OrderTableComponent implements OnInit {
   orderData$: Observable<OrderModel[]> = this.store.select(selectOrderData);
 
   displayedColumns: string[] = [
+    'orderDate',
     'orderId',
     'customerName',
     'customerId',

@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
   ],
   exports: [
     MatButtonModule,

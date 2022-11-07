@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DataActions } from '../store/actions/data.actions';
 import {
+  selectActiveOrders,
   selectCustomers,
   selectOrderInEdit,
 } from '../store/selectors/data.selectors';
@@ -8,7 +9,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { OrderModel } from '../models/order.model';
 import { CustomerEntityModel } from '../models/customer-entity.model';
-import { OrderEntityModel } from '../models/order-entity.model';
 
 @Component({
   selector: 'app-pages',
@@ -22,6 +22,8 @@ export class PagesComponent implements OnInit {
 
   orderInEdit$: Observable<OrderModel | undefined> =
     this.store.select(selectOrderInEdit);
+
+  activeOrders$: Observable<number> = this.store.select(selectActiveOrders);
 
   constructor(private store: Store) {}
 

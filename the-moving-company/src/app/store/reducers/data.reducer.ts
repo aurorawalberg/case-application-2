@@ -39,6 +39,12 @@ const _dataReducer = createReducer(
       orderInEdit: order,
     };
   }),
+  on(DataActions.clearOrderInEdit, (state) => {
+    return {
+      ...state,
+      orderInEdit: undefined,
+    };
+  }),
   on(DataActions.updateOrder, (state) => {
     return {
       ...state,

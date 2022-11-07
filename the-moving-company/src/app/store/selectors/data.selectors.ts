@@ -63,3 +63,8 @@ export const selectOrderInEdit = createSelector(
   getDataState,
   (state: DataState) => state.orderInEdit
 );
+
+export const selectActiveOrders = createSelector(
+  selectOrders,
+  (orders: OrderEntityModel[]) => orders.length
+);

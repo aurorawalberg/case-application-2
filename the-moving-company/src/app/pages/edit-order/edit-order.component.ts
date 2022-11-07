@@ -18,7 +18,9 @@ export class EditOrderComponent implements OnInit {
   @Input() customers: CustomerEntityModel[] = [];
 
   orderForm = new FormGroup({
-    customer: new FormControl('', [Validators.required]),
+    customerName: new FormControl('', [Validators.required]),
+    customerPhone: new FormControl('', [Validators.required]),
+    customerEmail: new FormControl('', [Validators.required]),
     fromAdress: new FormControl('', [Validators.required]),
     toAdress: new FormControl('', [Validators.required]),
     note: new FormControl(''),
@@ -33,18 +35,20 @@ export class EditOrderComponent implements OnInit {
       tap((orderInEdit) => {
         if (!!orderInEdit) {
           this.orderForm.patchValue({
-            customer: orderInEdit.customer.customerId,
+            customerName: orderInEdit.customer.name,
+            customerPhone: orderInEdit.customer.phoneNumber,
+            customerEmail: orderInEdit.customer.email,
             fromAdress: orderInEdit.order.fromAdress,
             toAdress: orderInEdit.order.toAdress,
             note: orderInEdit.order.note,
             moveDate: orderInEdit.services.find(
-              (s) => s.serviceType === 'Moving'
+              (s) => s.serviceType == 'Moving'
             )?.date,
             packDate: orderInEdit.services.find(
-              (s) => s.serviceType === 'Packing'
+              (s) => s.serviceType == 'Packing'
             )?.date,
             cleanDate: orderInEdit.services.find(
-              (s) => s.serviceType === 'Cleaning'
+              (s) => s.serviceType == 'Cleaning'
             )?.date,
           });
         }
@@ -55,11 +59,12 @@ export class EditOrderComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  clearOrderInEdit() {
+    this.store.dispatch(DataActions.clearOrderInEdit());
+  }
+
   onSubmit(orderInEdit: boolean): void {
     const services: ServiceEntityModel[] = [];
-    const customer: CustomerEntityModel = this.customers.find(
-      (customer) => customer.customerId === this.orderForm.value.customer
-    )!;
     if (this.orderForm.value.moveDate) {
       services.push({
         serviceType: 'Moving',
@@ -83,13 +88,19 @@ export class EditOrderComponent implements OnInit {
     }
     const order: OrderModel = {
       order: {
+        date: new Date(),
         orderId: 0,
-        customerId: customer.customerId,
+        customerId: this.orderForm.value.customerId,
         fromAdress: this.orderForm.value.fromAdress,
         toAdress: this.orderForm.value.toAdress,
         note: this.orderForm.value.note,
       },
-      customer,
+      customer: {
+        customerId: this.orderForm.value.customerId,
+        name: this.orderForm.value.customerName,
+        phoneNumber: this.orderForm.value.customerPhone,
+        email: this.orderForm.value.customerEmail,
+      },
       services,
     };
     if (orderInEdit) {
