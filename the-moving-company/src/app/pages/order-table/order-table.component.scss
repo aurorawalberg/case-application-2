@@ -3,12 +3,23 @@ table {
 }
 
 .services {
-  padding: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 .service-item {
   font-size: small;
 }
+.service-icon {
+  font-size: small;
+}
 
+.customer {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 .customer-phone {
+  font-size: small;
+}
+.customer-email {
   font-size: small;
 }

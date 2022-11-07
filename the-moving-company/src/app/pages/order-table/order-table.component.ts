@@ -47,7 +47,12 @@ export class OrderTableComponent implements OnInit {
       .select(selectOrderData)
       .pipe(
         map((orders) =>
-          orders.filter((o) => o.order.orderId.toString().includes(filterValue))
+          orders.filter((o) =>
+            o.customer.name
+              .toString()
+              .toLowerCase()
+              .includes(filterValue.toLowerCase())
+          )
         )
       );
   }
