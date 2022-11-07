@@ -13,6 +13,7 @@ enum ActionType {
   ServiceDataUpdated = '[Order page] Service Data Updated',
   LoadDataError = '[Order page] Error Loading Data',
   UpdateOrder = '[Order page] Update Order',
+  CreateOrder = '[Order page] Create Order',
   DeleteOrder = '[Order page] Delete Order',
   AddOrder = '[Order page] Add Order',
   SetOrderInEdit = '[Order page] Set Order In Edit',
@@ -41,11 +42,11 @@ export const DataActions = {
   ),
   updateOrder: createAction(
     ActionType.UpdateOrder,
-    props<{ order: OrderModel }>()
+    props<{ orderRequest: OrderModel }>()
   ),
   createOrder: createAction(
-    ActionType.UpdateOrder,
-    props<{ order: OrderModel }>()
+    ActionType.CreateOrder,
+    props<{ orderRequest: OrderModel }>()
   ),
   deleteOrder: createAction(
     ActionType.DeleteOrder,

@@ -44,12 +44,6 @@ const _dataReducer = createReducer(
       ...state,
       orderInEdit: undefined,
     };
-  }),
-  on(DataActions.updateOrder, (state) => {
-    return {
-      ...state,
-      orderInEdit: undefined,
-    };
   })
 );
 

@@ -48,6 +48,7 @@ export class DataEffects {
       )
     )
   );
+
   loadServiceData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DataActions.loadServiceData),
@@ -68,11 +69,12 @@ export class DataEffects {
       )
     )
   );
+
   createOrder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DataActions.createOrder),
       switchMap((action) =>
-        this.dataService.createOrder(action.order).pipe(
+        this.dataService.createOrder(action.orderRequest).pipe(
           switchMap(() => [
             DataActions.loadCustomerData(),
             DataActions.loadOrderData(),
@@ -82,6 +84,29 @@ export class DataEffects {
             of(
               DataActions.loadDataError({
                 message: 'Error creating order',
+                error: e.message,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  updateOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DataActions.updateOrder),
+      switchMap((action) =>
+        this.dataService.updateOrder(action.orderRequest).pipe(
+          switchMap(() => [
+            DataActions.loadCustomerData(),
+            DataActions.loadOrderData(),
+            DataActions.loadServiceData(),
+          ]),
+          catchError((e) =>
+            of(
+              DataActions.loadDataError({
+                message: 'Error updating order',
                 error: e.message,
               })
             )

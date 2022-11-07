@@ -71,8 +71,14 @@
       <button mat-raised-button type="reset" (click)="clearOrderInEdit()">
         Clear
       </button>
-      <button mat-raised-button color="warn" type="submit">
-        {{ !orderInEdit ? "Create" : "Update" }}
+      <button
+        mat-raised-button
+        (click)="clearOrderInEdit()"
+        color="warn"
+        type="submit"
+        [disabled]="!orderForm.valid"
+      >
+        {{ !!orderInEdit ? "Update" : "Create" }}
       </button>
     </div>
   </form>
