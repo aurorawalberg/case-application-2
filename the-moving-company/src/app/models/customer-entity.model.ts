@@ -1,5 +1,5 @@
 export interface CustomerEntityModel {
-  customerId: number;
+  id: number;
   name: string;
   email: string;
   phoneNumber: string;

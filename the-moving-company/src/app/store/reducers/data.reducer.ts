@@ -59,14 +59,14 @@ export function dataReducer(state: DataState, action: any) {
 
 function formatOrderDataToEntity(data: OrderEntityModel[]) {
   return data.reduce((acc: { [key: number]: OrderEntityModel }, cur) => {
-    acc[cur.orderId] = cur;
+    acc[cur.id] = cur;
     return acc;
   }, {});
 }
 
 function formatCustomerDataToEntity(data: CustomerEntityModel[]) {
   return data.reduce((acc: { [key: number]: CustomerEntityModel }, cur) => {
-    acc[cur.customerId] = cur;
+    acc[cur.id] = cur;
     return acc;
   }, {});
 }

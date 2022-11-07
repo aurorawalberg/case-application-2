@@ -6,7 +6,7 @@ import { ServiceEntityModel } from 'src/app/models/service-entity.model';
 import { Store } from '@ngrx/store';
 import { DataActions } from 'src/app/store/actions/data.actions';
 import { selectOrderInEdit } from 'src/app/store/selectors/data.selectors';
-import { map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-edit-order',
@@ -63,6 +63,7 @@ export class EditOrderComponent implements OnInit {
     this.store.dispatch(DataActions.clearOrderInEdit());
   }
 
+  //TODOAURORA: fikse id-er når ikke ny, handle i database
   onSubmit(orderInEdit: boolean): void {
     const services: ServiceEntityModel[] = [];
     if (this.orderForm.value.moveDate) {
@@ -89,14 +90,14 @@ export class EditOrderComponent implements OnInit {
     const order: OrderModel = {
       order: {
         date: new Date(),
-        orderId: 0,
+        id: 0,
         customerId: this.orderForm.value.customerId,
         fromAdress: this.orderForm.value.fromAdress,
         toAdress: this.orderForm.value.toAdress,
         note: this.orderForm.value.note,
       },
       customer: {
-        customerId: this.orderForm.value.customerId,
+        id: this.orderForm.value.customerId,
         name: this.orderForm.value.customerName,
         phoneNumber: this.orderForm.value.customerPhone,
         email: this.orderForm.value.customerEmail,

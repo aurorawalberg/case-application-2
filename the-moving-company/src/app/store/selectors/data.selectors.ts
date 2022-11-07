@@ -52,7 +52,7 @@ export const selectOrderData = createSelector(
     return Object.values(orders).map((order) => {
       return {
         order,
-        services: serviceEntities[order.orderId],
+        services: serviceEntities[order.id],
         customer: customerEntities[order.customerId],
       };
     });

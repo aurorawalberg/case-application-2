@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CustomerEntityModel } from '../models/customer-entity.model';
 import { OrderEntityModel } from '../models/order-entity.model';
 import { OrderModel } from '../models/order.model';
@@ -36,14 +36,14 @@ export class ApiService {
     return this.httpClient.delete(`${baseAPIUrl}/orders/${orderId}`);
   }
 
-  updateOrder(order: OrderModel) {
+  updateOrder(orderRequest: OrderModel) {
     return this.httpClient.post(
-      `${baseAPIUrl}/orders/${order.order.orderId}`,
-      order
+      `${baseAPIUrl}/orders/${orderRequest.order.id}`,
+      orderRequest
     );
   }
 
-  createOrder(order: OrderModel) {
-    return this.httpClient.post(`${baseAPIUrl}/orders`, order);
+  createOrder(orderRequest: OrderModel) {
+    return this.httpClient.post(`${baseAPIUrl}/orders`, orderRequest);
   }
 }

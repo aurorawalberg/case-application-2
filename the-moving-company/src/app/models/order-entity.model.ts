@@ -1,5 +1,5 @@
 export interface OrderEntityModel {
-  orderId: number;
+  id: number;
   customerId: number;
   fromAdress: string;
   toAdress: string;
