@@ -75,6 +75,7 @@ export class EditOrderComponent implements OnInit {
     } else {
       this.store.dispatch(DataActions.createOrder({ orderRequest }));
     }
+    this.orderForm.reset();
   }
 
   processOrderRequestForApi(orderInEdit: OrderModel): OrderModel {
