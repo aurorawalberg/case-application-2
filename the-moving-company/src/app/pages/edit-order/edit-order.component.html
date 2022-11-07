@@ -1,5 +1,5 @@
 <div *ngLet="orderInEdit$ | async as orderInEdit">
-  <form [formGroup]="orderForm" (ngSubmit)="onSubmit(!!orderInEdit)">
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit(orderInEdit)">
     <mat-form-field appearance="legacy" color="warn">
       <mat-label>Customer name </mat-label>
       <input matInput formControlName="customerName" />

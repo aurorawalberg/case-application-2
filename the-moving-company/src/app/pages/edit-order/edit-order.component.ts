@@ -14,7 +14,6 @@ import { Observable, tap } from 'rxjs';
   styleUrls: ['./edit-order.component.scss'],
 })
 export class EditOrderComponent implements OnInit {
-  @Output() submit = new EventEmitter<OrderModel>();
   @Input() customers: CustomerEntityModel[] = [];
 
   orderForm = new FormGroup({
@@ -63,34 +62,33 @@ export class EditOrderComponent implements OnInit {
     this.store.dispatch(DataActions.clearOrderInEdit());
   }
 
-  //TODOAURORA: fikse id-er når ikke ny, handle i database
-  onSubmit(orderInEdit: boolean): void {
+  onSubmit(orderInEdit: OrderModel): void {
     const services: ServiceEntityModel[] = [];
     if (this.orderForm.value.moveDate) {
       services.push({
         serviceType: 'Moving',
         date: this.orderForm.value.moveDate,
-        orderId: 0,
+        orderId: orderInEdit.order.id ? orderInEdit.order.id : -1,
       });
     }
     if (this.orderForm.value.packDate) {
       services.push({
         serviceType: 'Packing',
         date: this.orderForm.value.packDate,
-        orderId: 0,
+        orderId: orderInEdit.order.id ? orderInEdit.order.id : -1,
       });
     }
     if (this.orderForm.value.cleanDate) {
       services.push({
         serviceType: 'Cleaning',
         date: this.orderForm.value.cleanDate,
-        orderId: 0,
+        orderId: orderInEdit.order.id ? orderInEdit.order.id : -1,
       });
     }
     const order: OrderModel = {
       order: {
         date: new Date(),
-        id: 0,
+        id: orderInEdit.order.id ? orderInEdit.order.id : -1,
         customerId: this.orderForm.value.customerId,
         fromAdress: this.orderForm.value.fromAdress,
         toAdress: this.orderForm.value.toAdress,
@@ -104,7 +102,7 @@ export class EditOrderComponent implements OnInit {
       },
       services,
     };
-    if (orderInEdit) {
+    if (!!orderInEdit) {
       this.store.dispatch(DataActions.updateOrder({ order }));
     } else {
       this.store.dispatch(DataActions.createOrder({ order }));
