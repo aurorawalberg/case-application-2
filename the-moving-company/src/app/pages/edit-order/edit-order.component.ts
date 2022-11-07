@@ -8,6 +8,7 @@ import { DataActions } from 'src/app/store/actions/data.actions';
 import { selectOrderInEdit } from 'src/app/store/selectors/data.selectors';
 import { Observable, tap } from 'rxjs';
 import { OrderEntityModel } from 'src/app/models/order-entity.model';
+import { CustomerApiModel, OrderApiModel } from 'src/app/models/data-api.model';
 
 @Component({
   selector: 'app-edit-order',
@@ -29,9 +30,10 @@ export class EditOrderComponent implements OnInit {
     cleanDate: new FormControl(''),
   });
 
-  nextOrderId = 0;
-  nextServiceId = 0;
-  nextCustomerId = 0;
+  // TODO - don't hardcode these
+  nextOrderId = 50;
+  nextServiceId = 50;
+  nextCustomerId = 50;
 
   orderInEdit$: Observable<OrderModel | undefined> = this.store
     .select(selectOrderInEdit)
@@ -75,10 +77,12 @@ export class EditOrderComponent implements OnInit {
     } else {
       this.store.dispatch(DataActions.createOrder({ orderRequest }));
     }
+    // TODO - this should handled by angular forms but isn't working
     this.orderForm.reset();
   }
 
   processOrderRequestForApi(orderInEdit: OrderModel): OrderModel {
+    // TODO - hacky way to get somewhat correct api format
     const customer: CustomerEntityModel = {
       id: orderInEdit?.customer?.id
         ? orderInEdit?.customer?.id
@@ -99,6 +103,21 @@ export class EditOrderComponent implements OnInit {
     };
 
     const services: ServiceEntityModel[] = [];
+    const customerApiModel: CustomerApiModel = {
+      id: customer.id,
+      name: customer.name,
+      phoneNumber: customer.phoneNumber,
+      email: customer.email,
+    };
+    const orderApiModel: OrderApiModel = {
+      id: order.id,
+      customerId: order.customerId,
+      customer: customerApiModel,
+      fromAdress: order.fromAdress,
+      toAdress: order.toAdress,
+      date: order.date,
+      note: order.note,
+    };
     if (this.orderForm.value.moveDate) {
       services.push({
         id:
@@ -109,8 +128,8 @@ export class EditOrderComponent implements OnInit {
         orderId: orderInEdit?.order?.id
           ? orderInEdit.order.id
           : this.nextOrderId,
-        customer,
-        order,
+        customer: customerApiModel,
+        order: orderApiModel,
       });
     }
     if (this.orderForm.value.packDate) {
@@ -124,8 +143,8 @@ export class EditOrderComponent implements OnInit {
         orderId: orderInEdit?.order?.id
           ? orderInEdit?.order?.id
           : this.nextOrderId,
-        customer,
-        order,
+        customer: customerApiModel,
+        order: orderApiModel,
       });
     }
     if (this.orderForm.value.cleanDate) {
@@ -138,8 +157,8 @@ export class EditOrderComponent implements OnInit {
         orderId: orderInEdit?.order?.id
           ? orderInEdit?.order?.id
           : this.nextOrderId,
-        customer,
-        order,
+        customer: customerApiModel,
+        order: orderApiModel,
       });
     }
     return {

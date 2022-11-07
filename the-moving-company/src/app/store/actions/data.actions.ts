@@ -11,6 +11,7 @@ enum ActionType {
   OrderDataUpdated = '[Order page] Order Data Updated',
   LoadServiceData = '[Order page] Load Service Data',
   ServiceDataUpdated = '[Order page] Service Data Updated',
+  RemoveDataError = '[Order page] Remove Data Error',
   LoadDataError = '[Order page] Error Loading Data',
   UpdateOrder = '[Order page] Update Order',
   CreateOrder = '[Order page] Create Order',
@@ -25,6 +26,7 @@ export const DataActions = {
     ActionType.LoadDataError,
     props<{ message: string; error?: string }>()
   ),
+  removeDataError: createAction(ActionType.RemoveDataError),
   loadCustomerData: createAction(ActionType.LoadCustomerData),
   customerDataUpdated: createAction(
     ActionType.CustomerDataUpdated,

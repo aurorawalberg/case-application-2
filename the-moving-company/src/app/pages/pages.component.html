@@ -10,9 +10,20 @@
         There are {{ activeOrders }} active orders
       </div>
       <span class="toolbar-spacer"></span>
+      <button (click)="refreshData()" mat-icon-button>
+        <mat-icon>refresh</mat-icon>
+      </button>
       <div class="top-bar-info">Logged in as sales</div>
     </mat-toolbar>
   </p>
+  <div class="error" *ngIf="error$ | async as error">
+    <div *ngIf="error[0]">
+      {{ error[0] }}
+      <button (click)="removeError()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
   <div class="page-content" *ngIf="customers$ | async as customers">
     <app-order-table [customers]="customers"></app-order-table>
     <mat-card>

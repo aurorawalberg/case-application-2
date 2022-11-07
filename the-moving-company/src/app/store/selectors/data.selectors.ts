@@ -69,39 +69,7 @@ export const selectActiveOrders = createSelector(
   (orders: OrderEntityModel[]) => orders.length
 );
 
-export const selectNextOrderId = createSelector(
-  selectOrders,
-  (orders: OrderEntityModel[]) => {
-    const ids = orders.map((order) => order.id);
-    return Math.max(...ids) + 1;
-  }
-);
-
-export const selectNextServiceId = createSelector(
-  selectServices,
-  (services: ServiceEntityModel[][]) => {
-    const ids = services.map((service) => service.map((s) => s.id)).flat();
-    return Math.max(...ids) + 1;
-  }
-);
-
-export const selectNextCustomerId = createSelector(
-  selectCustomers,
-  (customers: CustomerEntityModel[]) => {
-    const ids = customers.map((customer) => customer.id);
-    return Math.max(...ids) + 1;
-  }
-);
-
-export const selectNextIds = createSelector(
-  selectNextOrderId,
-  selectNextCustomerId,
-  selectNextServiceId,
-  (orderId: number, customerId: number, serviceId: number) => {
-    return {
-      orderId,
-      customerId,
-      serviceId,
-    };
-  }
+export const selectError = createSelector(
+  getDataState,
+  (state: DataState) => state.error
 );

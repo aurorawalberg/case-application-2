@@ -44,6 +44,18 @@ const _dataReducer = createReducer(
       ...state,
       orderInEdit: undefined,
     };
+  }),
+  on(DataActions.loadDataError, (state, { message, error }) => {
+    return {
+      ...state,
+      error: [...state.error, message + ': ' + error],
+    };
+  }),
+  on(DataActions.removeDataError, (state) => {
+    return {
+      ...state,
+      error: [],
+    };
   })
 );
 

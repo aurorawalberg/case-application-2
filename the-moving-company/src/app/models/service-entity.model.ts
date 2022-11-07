@@ -1,4 +1,5 @@
 import { CustomerEntityModel } from './customer-entity.model';
+import { CustomerApiModel, OrderApiModel } from './data-api.model';
 import { OrderEntityModel } from './order-entity.model';
 
 export interface ServiceEntityModel {
@@ -6,6 +7,6 @@ export interface ServiceEntityModel {
   orderId: number;
   serviceType: string;
   date: Date;
-  order?: OrderEntityModel;
-  customer?: CustomerEntityModel;
+  order?: OrderEntityModel | OrderApiModel;
+  customer?: CustomerEntityModel | CustomerApiModel;
 }

@@ -3,6 +3,7 @@ import { DataActions } from '../store/actions/data.actions';
 import {
   selectActiveOrders,
   selectCustomers,
+  selectError,
   selectOrderInEdit,
 } from '../store/selectors/data.selectors';
 import { Store } from '@ngrx/store';
@@ -24,12 +25,23 @@ export class PagesComponent implements OnInit {
     this.store.select(selectOrderInEdit);
 
   activeOrders$: Observable<number> = this.store.select(selectActiveOrders);
+  error$: Observable<string[]> = this.store.select(selectError);
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.store.dispatch(DataActions.loadOrderData());
     this.store.dispatch(DataActions.loadCustomerData());
     this.store.dispatch(DataActions.loadServiceData());
+  }
+
+  refreshData() {
     this.store.dispatch(DataActions.loadOrderData());
+    this.store.dispatch(DataActions.loadCustomerData());
+    this.store.dispatch(DataActions.loadServiceData());
+  }
+
+  removeError() {
+    this.store.dispatch(DataActions.removeDataError());
   }
 }
