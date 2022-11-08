@@ -9,10 +9,10 @@
       <div *ngIf="activeOrders$ | async as activeOrders" class="top-bar-info">
         There are {{ activeOrders }} active orders
       </div>
-      <span class="toolbar-spacer"></span>
       <button (click)="refreshData()" mat-icon-button>
         <mat-icon>refresh</mat-icon>
       </button>
+      <span class="toolbar-spacer"></span>
       <div class="top-bar-info">Logged in as sales</div>
     </mat-toolbar>
   </p>
